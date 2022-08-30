@@ -1,0 +1,15 @@
+﻿@{
+    var parmsKA = new Dictionary<string, string> {
+                { "culture", "KA" },
+                { "returnUrl", Context.Request.Path }
+    };
+    var parmsEN = new Dictionary<string, string> {
+                { "culture", "EN" },
+                { "returnUrl", @Context.Request.Path }
+    };
+}
+
+<div>
+    <a class="text-black px-3" asp-controller="BankService" asp-action="SetLanguage" asp-all-route-data="parmsKA">GEO</a>
+    <a class="text-black" asp-controller="BankService" asp-action="SetLanguage" asp-all-route-data="parmsEN">ENG</a>
+</div>

@@ -1,0 +1,90 @@
+﻿@{
+    @model RemoteBankServices.ViewModel.ServiceViewModel
+    @using Microsoft.AspNetCore.Mvc.Localization
+    @inject IViewLocalizer Localizer
+
+}
+
+<div class="row">
+    <div class="col-lg-8 px-0">
+        <div class="col-lg px-0">
+            <img id="bank-image" src="/img/HO021_2.jpg" class="img-fluid">
+            @*<img src="/img/glob_gray.svg" class="img-fluid glob-gray">*@
+        </div>
+    </div>
+    <div class="col-lg-4 p-5 form-input">
+        <form method="post">
+            <h2 class="mb-4">@Localizer["Application"]</h2>
+            <label class="mb-4">@Localizer["FillTheForm"]</label>
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger text-size"></div>
+                <div class="col-lg-12 mb-3">
+                    <label class="" for="chooseService">@Localizer["ChooseService"]</label>
+                    <select id="chooseService" class="form-select" asp-for="service" asp-items="ViewBag.services"></select>
+                </div>
+                <div class="col-lg mb-3">
+                    <input type="text" class="form-control" id="txtFirstName" name="FirstName" placeholder=@Localizer["FirstName"] aria-label=@Localizer["FirstName"]>
+                    <span asp-validation-for="FirstName" class="text-danger text-size"></span>
+                </div>
+                <div class="col-lg mb-3">
+                    <input type="text" class="form-control" id="txtLastName" name="LastName" placeholder=@Localizer["LastName"] aria-label=@Localizer["LastName"]>
+                    <span asp-validation-for="LastName" class="text-danger text-size"></span>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <input type="text" class="form-control" id="txtEmail" name="Email" placeholder=@Localizer["Email"]>
+                    <span asp-validation-for="Email" class="text-danger text-size"></span>
+                </div>
+                <div class="col-lg-12 mb-3">
+                    <label for="txtPhoneNumber">@Localizer["PhoneNumber"]</label>
+                    <input class="form-control" type="tel" id="txtPhoneNumber" name="PhoneNumber">
+                    <span asp-validation-for="PhoneNumber" class="text-danger text-size"></span>
+                </div>
+                <hr />
+                <div class="col-lg-1 mb-3">
+                    <input id="agreeReceiveInfo" asp-for="AgreeReceiveInfo">
+                </div>
+                <div class="col-lg-11 mb-3">
+                    <label for="agreeReceiveInfo">﻿﻿﻿﻿@Localizer["AgreeReceiveInfo"]</label>
+                </div>
+            </div>
+            <input type="submit" class="col-lg-12 btn btn-danger btn-rounded" value=@Localizer["CallMe"] asp-page-handler="Create" />
+        </form>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="MessageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h5 class="modal-title" id="messageModalLabel">Modal title</h5>*@
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.Message
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-rounded" data-bs-dismiss="modal">@Localizer["Close"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/intlTelInput.js"></script>
+<script>
+    var input = document.querySelector("#txtPhoneNumber");
+    window.intlTelInput(input, {
+        preferredCountries: ["ge", "us"],
+        hiddenInput: "FullPhoneNumber",
+        utilsScript: "./js/utils.js?1638200991544"
+    });
+</script>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            $('#MessageModal').modal('show');
+                
+            };
+    </script>
+}

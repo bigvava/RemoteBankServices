@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RemoteBankServices</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/intlTelInput.css">
+</head>
+<body>
+    <header class="fancy-border">
+        <nav class="navbar navbar-white bg-white" style="z-index: 1">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="BankService" asp-action="Create">
+                    <img src=@Localizer["logo"] alt="ProCredit Bank" height="50">
+                </a>
+
+                <partial name="_SelectLanguagePartial.cshtml" />
+
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer bg-light text-muted">
+        <div class="container text-center">
+            2022 &copy; ProCredit Bank Georgia
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
